@@ -1,7 +1,36 @@
 @import "bulma/bulma";
 
-body {
-  margin: 0;
-  padding: 0;
-  font-family: sans-serif;
+.nav-bar-background {
+  background-color: #989898;
+}
+
+.nav-bar-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.container-todo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.todo-wrapper {
+  width: 80%;
+}
+
+.todo-control-wrapper,
+.todo-control {
+  width: 100%;
+}
+
+.todo-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navbar-item img.logo {
+  max-width: 50px;
+  max-height: 50px;
 }
