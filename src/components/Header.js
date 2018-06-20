@@ -2,11 +2,7 @@ import React from "react";
 
 const Header = function() {
   return (
-    <nav
-      className="navbar nav-bar-background"
-      role="navigation"
-      aria-label="main navigation"
-    >
+    <nav className="navbar nav-bar-background" aria-label="main navigation">
       <div className="navbar-brand">
         <a className="navbar-item container-todo">
           <img

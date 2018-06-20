@@ -8,28 +8,51 @@ class ToDo extends React.Component {
     addTaskText: "robson",
     taskList: [
       {
-        text: "arnaldo"
+        text: "arnaldo",
+        completed: true
       },
       {
-        text: "antunes"
+        text: "antunes",
+        completed: false
       }
     ]
   };
+
+  completeTask(taskIndex) {
+    const localTaskList = this.state.taskList;
+
+    localTaskList[taskIndex].completed = true;
+
+    this.setState({
+      taskList: localTaskList
+    });
+  }
+
+  removeTask(taskIndex) {
+    const localTaskList = this.state.taskList;
+
+    this.setState({
+      taskList: localTaskList.filter((el, index) => index !== taskIndex)
+    });
+  }
 
   changeText(taskText) {
     this.setState({ addTaskText: taskText });
   }
 
   addTask() {
-    const newTask = {
-      text: this.state.addTaskText
-    };
-    const newTaskList = this.state.taskList.concat(newTask);
+    if (this.state.addTaskText !== "") {
+      const newTask = {
+        text: this.state.addTaskText,
+        completed: false
+      };
+      const newTaskList = this.state.taskList.concat(newTask);
 
-    this.setState({
-      addTaskText: "",
-      taskList: newTaskList
-    });
+      this.setState({
+        addTaskText: "",
+        taskList: newTaskList
+      });
+    }
   }
 
   render() {
@@ -43,7 +66,11 @@ class ToDo extends React.Component {
               onChangeText={text => this.changeText(text)}
               onAddTask={() => this.addTask()}
             />
-            <TaskList taskList={this.state.taskList} />
+            <TaskList
+              taskList={this.state.taskList}
+              onCompleteTask={index => this.completeTask(index)}
+              onRemoveTask={index => this.removeTask(index)}
+            />
           </div>
         </div>
       </section>
