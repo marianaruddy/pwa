@@ -30,7 +30,20 @@
   justify-content: space-between;
 }
 
+.todo-box-completed {
+  background-color: #b2ffb2;
+  text-decoration: line-through;
+}
+
 .navbar-item img.logo {
   max-width: 50px;
   max-height: 50px;
+}
+
+.red-div {
+  background-color: red;
+
+  margin-top: 50px;
+  min-width: 30px;
+  min-height: 30px;
 }
