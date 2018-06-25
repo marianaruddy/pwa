@@ -12,4 +12,9 @@ window.addEventListener("beforeinstallprompt", function(event) {
   window.a2hsEvent = event;
 });
 
-registerServiceWorker();
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker
+    .register("/sw.js")
+    .then(() => console.log("registrou porra"))
+    .catch(() => console.log("registrou nao porra"));
+}
