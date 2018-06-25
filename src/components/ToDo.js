@@ -2,21 +2,29 @@ import React from "react";
 import ToDoTitle from "./ToDoTitle";
 import ToDoInput from "./ToDoInput";
 import TaskList from "./TaskList";
+import * as localForage from "localforage";
+
+const DB_NAME = "ToDoList";
 
 class ToDo extends React.Component {
   state = {
-    addTaskText: "robson",
-    taskList: [
-      {
-        text: "arnaldo",
-        completed: true
-      },
-      {
-        text: "antunes",
-        completed: false
-      }
-    ]
+    addTaskText: "",
+    taskList: []
   };
+
+  componentWillMount(){
+    localForage
+    .getItem(DB_NAME)
+    .then(value => {
+      console.log("Recuperei a lista do DB", value);
+      this.setState({
+        taskList: value
+      });
+    })
+    .catch(()=> {
+      console.log("ferrou");
+    });
+  }
 
   completeTask(taskIndex) {
     const localTaskList = this.state.taskList;
@@ -25,7 +33,9 @@ class ToDo extends React.Component {
 
     this.setState({
       taskList: localTaskList
-    });
+    }, 
+    this.updateDatabase
+  );
   }
 
   removeTask(taskIndex) {
@@ -33,7 +43,9 @@ class ToDo extends React.Component {
 
     this.setState({
       taskList: localTaskList.filter((el, index) => index !== taskIndex)
-    });
+    }, 
+    this.updateDatabase
+  );
   }
 
   changeText(taskText) {
@@ -51,8 +63,24 @@ class ToDo extends React.Component {
       this.setState({
         addTaskText: "",
         taskList: newTaskList
-      });
+      }, 
+      this.updateDatabase
+      );
     }
+  }
+
+  updateDatabase(){
+    const persistentTaskLIst = this.state.taskList;
+
+    localForage
+    .setItem(DB_NAME, persistentTaskLIst)
+    .then((value) => {
+      console.log('consegui persistir', value);
+    })
+    .catch(error => {
+      console.log('nao consegui persistir', error);
+    });
+
   }
 
   render() {
