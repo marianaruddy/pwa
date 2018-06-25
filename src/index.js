@@ -14,6 +14,6 @@ window.addEventListener("beforeinstallprompt", function(event) {
 if ("serviceWorker" in navigator) {
   navigator.serviceWorker
     .register("/sw.js")
-    .then(() => console.log("registrou porra"))
-    .catch(() => console.log("registrou nao porra"));
+    .then(() => console.log("service worker registrado"))
+    .catch(() => console.log("service worker nao registrado"));
 }
