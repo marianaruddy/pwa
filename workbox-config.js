@@ -14,6 +14,7 @@ module.exports = {
       urlPattern: new RegExp("/\.(?:png|gif|jpg|svg)$/"),
       handler: "cacheFirst",
       options: {
+        cacheName: "cache-de-imagens",
         expiration: {
           maxEntries: 5,
           maxAgeSeconds: 60*60*24*30
@@ -24,6 +25,7 @@ module.exports = {
       urlPattern: new RegExp("^https://swapi.co/api/"),
       handler: "staleWhileRevalidate",
       options: {
+        cacheName: "cache-swapi",
         expiration: {
           maxEntries: 3
         }
