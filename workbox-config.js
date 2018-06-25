@@ -1,4 +1,5 @@
 module.exports = {
+  skipWaiting: true,
   globDirectory: "build/",
   globPatterns: ["**/*.{ico,png,html,js,css}"],
   swDest: "build/sw.js",
